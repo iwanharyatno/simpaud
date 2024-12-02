@@ -14,7 +14,7 @@ require "./db/config.php";
 <body>
     <header>
         <nav>
-            <h1 style="font-family: Poppins;">SIMPAUD</h1>
+            <h1>SIMPAUD</h1>
             <ul>
                 <li><a href="#">Beranda</a></li>
                 <li><a href="#">Tentang Kami</a></li>
