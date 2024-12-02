@@ -69,9 +69,11 @@ body {
 
 .btn {
     display: inline-block;
-    padding: 0.4rem 1.2rem;
+    padding: 0.5rem 1.2rem;
     text-decoration: none;
     border-radius: 0.3rem;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -111,4 +113,42 @@ body {
 #hero-bermain {
     color: var(--color-secondary);
     font-weight: 600;
+}
+
+#formLogin {
+    font-size: small;
+}
+.login-flex {
+    display: flex;
+    min-height: 100vh;
+}
+
+.login-left-side {
+    width: 70%;
+}
+.login-right-side {
+    background-color: var(--color-light);
+    width: 30%;
+    padding: 2rem;
+}
+
+.login-form-title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.form-label, .form-control {
+    display: block;
+}
+.form-control {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+}
+.w-full {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 1rem;
 }

@@ -1,7 +1,3 @@
-<?php
-require "./db/config.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +25,7 @@ require "./db/config.php";
             <div class="hero-text">
                 <p class="hero-title">Tempat pilihan untuk <span id="hero-belajar">belajar</span> dan <span id="hero-bermain">bermain</span> untuk anak!</p>
                 <p class="hero-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, voluptatibus! Praesentium, adipisci!</p>
-                <a href="javascript:void(0)" class="btn btn-primary hero-btn">Ayo mulai!</a>
+                <a href="register.php" class="btn btn-primary hero-btn">Ayo mulai!</a>
             </div>
         </section>
     </header>
