@@ -8,12 +8,13 @@ require "../db/config.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIMPAUD - Sistem Informasi PAUD</title>
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
         <nav>
-            <h1>SIMPAUD</h1>
+            <h1 style="font-family: Poppins;">SIMPAUD</h1>
             <ul>
                 <li><a href="#">Beranda</a></li>
                 <li><a href="#">Tentang Kami</a></li>
