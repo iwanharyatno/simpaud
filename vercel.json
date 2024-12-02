@@ -6,28 +6,8 @@
     },
     "routes": [
         {
-            "src": "/",
-            "dest": "api/index.php"
-        },
-        {
-            "src": "/register",
-            "dest": "api/register.php"
-        },
-        {
-            "src": "/css/(.*)",
-            "dest": "api/css/$1"
-        },
-        {
-            "src": "/fonts/(.*)",
-            "dest": "api/fonts/$1"
-        },
-        {
-            "src": "/scripts/(.*)",
-            "dest": "api/scripts/$1"
-        },
-        {
-            "src": "/handler/register-handler",
-            "dest": "api/handler/register-handler.php"
+            "src": "/(.*)",
+            "dest": "api/$1"
         }
     ]
 }
