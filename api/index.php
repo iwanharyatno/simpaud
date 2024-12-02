@@ -37,7 +37,7 @@
         </section>
     </header>
 
-    <script src="scripts/scripts.js"></script>
+    <script src="/assets/scripts/scripts.js"></script>
 </body>
 
 </html>
