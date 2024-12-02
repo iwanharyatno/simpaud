@@ -30,21 +30,22 @@ body {
 
 .navigation {
     display: flex;
-    align-items: center;
     padding: 1rem 2rem;
-    position: fixed;
+    position: static;
     top: 0;
     left: 0;
     width: 100%;
+    flex-direction: column;
 }
 
 .navigation-menu {
-    display: flex;
+    display: none;
+    flex-direction: column;
     list-style-type: none;
     gap: 1rem;
-    align-items: center;
     flex-grow: 1;
     justify-content: end;
+    padding: 1rem 0;
 }
 .navigation-item {
     display: inline-block;
@@ -66,6 +67,11 @@ body {
 .navigation-title {
     font-size: 1.2rem;
 }
+.nav-toggle-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .btn {
     display: inline-block;
@@ -74,6 +80,7 @@ body {
     border-radius: 0.3rem;
     border: none;
     cursor: pointer;
+    background-color: transparent;
 }
 
 .btn-primary {
@@ -88,17 +95,15 @@ body {
     padding: 2rem;
     display: flex;
     justify-content: center;
-    align-items: center;
     min-height: 100vh;
 }
 
 .hero-title {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
 .hero-text {
-    text-align: center;
     max-width: 32rem;
 }
 
@@ -121,14 +126,15 @@ body {
 .login-flex {
     display: flex;
     min-height: 100vh;
+    flex-direction: column-reverse;
 }
 
 .login-left-side {
-    width: 70%;
+    width: 100%;
 }
 .login-right-side {
     background-color: var(--color-light);
-    width: 30%;
+    width: 100%;
     padding: 2rem;
 }
 
@@ -151,4 +157,35 @@ body {
 
 .form-group {
     margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .nav-toggler {
+        display: none;
+    }
+    .navigation-menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+    }
+    .navigation {
+        flex-direction: row;
+        align-items: center;
+        position: fixed
+    }
+    .hero {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-flex {
+        flex-direction: row;
+    }
+    .login-left-side {
+        width: 65%;
+    }
+    .login-right-side {
+        width: 35%;
+    }
 }

@@ -12,13 +12,20 @@
 <body>
     <header class="header">
         <nav class="navigation">
-            <h1 class="navigation-title"><span id="title-sim">SIM</span>PAUD</h1>
-            <ul class="navigation-menu">
+            <div class="nav-toggle-group">
+                <h1 class="navigation-title"><span id="title-sim">SIM</span>PAUD</h1>
+                <button class="btn btn-hamburger nav-toggler" data-toggle="#mainMenu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </button>
+            </div>
+            <ul class="navigation-menu" id="mainMenu">
                 <li><a class="navigation-item" href="/">Beranda</a></li>
                 <li><a class="navigation-item" href="#">Tentang Kami</a></li>
                 <li><a class="navigation-item" href="#">Informasi Layanan</a></li>
                 <li><a class="navigation-item nav-last-item" href="#">Kontak</a></li>
-                <li><a class="btn btn-primary" href="javascript:void(0)">Daftar</a></li>
+                <li><a class="btn btn-primary" href="register.php">Daftar</a></li>
             </ul>
         </nav>
         <section class="hero">
@@ -29,6 +36,8 @@
             </div>
         </section>
     </header>
+
+    <script src="scripts/scripts.js"></script>
 </body>
 
 </html>
