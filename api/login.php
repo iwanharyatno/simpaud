@@ -21,8 +21,8 @@ session_start();
     <main class="register-flex">
         <div class="register-left-side">
         </div>
-        <form action="handler/register-handler.php" method="post" class="register-right-side" id="formRegister">
-            <h1 class="register-form-title">Daftar</h1>
+        <form action="handler/login-handler.php" method="post" class="register-right-side" id="formRegister">
+            <h1 class="register-form-title">Login</h1>
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="alert alert-error">
                 <?= $_SESSION['error'] ?>
@@ -30,32 +30,20 @@ session_start();
             </div>
             <?php endif; ?>
             <div class="form-group">
-                <label for="username" class="form-label">Nama</label>
-                <input type="text" class="form-control w-full" id="username" name="username" required value="<?= isset($oldData) ?  $oldData['username'] : '' ?>">
-            </div>
-            <div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control w-full" id="email" name="email" required value="<?= isset($oldData) ?  $oldData['email'] : '' ?>">
-            </div>
-            <div class="form-group">
-                <label for="telepon" class="form-label">Telepon</label>
-                <input type="text" class="form-control w-full" id="telepon" name="telepon" required value="<?= isset($oldData) ?  $oldData['telepon'] : '' ?>">
             </div>
             <div class="form-group">
                 <label for="sandi" class="form-label">Sandi</label>
                 <input type="password" class="form-control w-full" id="sandi" name="sandi" required>
             </div>
             <div class="form-group">
-                <label for="sandi_ulang" class="form-label">Ketik ulang sandi</label>
-                <input type="password" class="form-control w-full" id="sandi_ulang" required>
-            </div>
-            <div class="form-group">
                 <input type="checkbox" id="toggleSandi">
                 <label for="toggleSandi">Tampil sandi</label>
             </div>
-            <p>Sudah punya akun? <a href="/login.php">Login</a></p>
+            <p>Belum punya akun? <a href="/register.php">Daftar</a></p>
             <br>
-            <button class="btn btn-primary w-full">Kirim</button>
+            <button class="btn btn-primary w-full">Masuk</button>
         </form>
     </main>
 
@@ -67,24 +55,11 @@ session_start();
 
         toggleSandi.addEventListener('click', function() {
             const sandi = formregister.querySelector('#sandi');
-            const sandiUlang = formregister.querySelector('#sandi_ulang');
 
             if (toggleSandi.checked) {
                 sandi.setAttribute('type', 'text');
-                sandiUlang.setAttribute('type', 'text');
             } else {
                 sandi.setAttribute('type', 'password');
-                sandiUlang.setAttribute('type', 'password');
-            }
-        });
-
-        formregister.addEventListener('submit', function(e) {
-            const sandi = formregister.querySelector('#sandi').value;
-            const sandiUlang = formregister.querySelector('#sandi_ulang').value;
-
-            if (sandi != sandiUlang) {
-                alert("Ketik ulang kata sandi yang sama.")
-                e.preventDefault();
             }
         });
     </script>
