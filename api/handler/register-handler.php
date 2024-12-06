@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require "./api/db/config.php";
+require __DIR__ . "/../db/config.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $username = $_POST['username'];
