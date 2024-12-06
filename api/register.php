@@ -1,29 +1,45 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | SIMPAUD</title>
+    <title>Register | SIMPAUD</title>
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
-    <main class="login-flex">
-        <div class="login-left-side">
+    <?php
+        if (isset($_SESSION['error'])) {
+            $oldData = $_SESSION['data'];
+            session_destroy();
+        }
+    ?>
+    <main class="register-flex">
+        <div class="register-left-side">
         </div>
-        <form action="handler/register-handler.php" method="post" class="login-right-side" id="formLogin">
-            <h1 class="login-form-title">Login</h1>
+        <form action="handler/register-handler.php" method="post" class="register-right-side" id="formRegister">
+            <h1 class="register-form-title">Daftar</h1>
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-error">
+                <?= $_SESSION['error'] ?>
+                <button class="alert-dismiss">&times;</button>
+            </div>
+            <?php endif; ?>
             <div class="form-group">
                 <label for="username" class="form-label">Nama</label>
-                <input type="text" class="form-control w-full" id="username" name="username" required>
+                <input type="text" class="form-control w-full" id="username" name="username" required value="<?= isset($oldData) ?  $oldData['username'] : '' ?>">
             </div>
             <div class="form-group">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control w-full" id="email" name="email" required>
+                <input type="email" class="form-control w-full" id="email" name="email" required value="<?= isset($oldData) ?  $oldData['email'] : '' ?>">
             </div>
             <div class="form-group">
                 <label for="telepon" class="form-label">Telepon</label>
-                <input type="text" class="form-control w-full" id="telepon" name="telepon" required>
+                <input type="text" class="form-control w-full" id="telepon" name="telepon" required value="<?= isset($oldData) ?  $oldData['telepon'] : '' ?>">
             </div>
             <div class="form-group">
                 <label for="sandi" class="form-label">Sandi</label>
@@ -38,17 +54,19 @@
                 <label for="toggleSandi">Tampil sandi</label>
             </div>
             <br>
-            <button class="btn btn-primary w-full">Login</button>
+            <button class="btn btn-primary w-full">Kirim</button>
         </form>
     </main>
 
+    <script src="/assets/scripts/alert.js"></script>
+
     <script>
-        const formLogin = document.getElementById('formLogin');
+        const formregister = document.getElementById('formregister');
         const toggleSandi = document.getElementById('toggleSandi');
 
         toggleSandi.addEventListener('click', function() {
-            const sandi = formLogin.querySelector('#sandi');
-            const sandiUlang = formLogin.querySelector('#sandi_ulang');
+            const sandi = formregister.querySelector('#sandi');
+            const sandiUlang = formregister.querySelector('#sandi_ulang');
 
             if (toggleSandi.checked) {
                 sandi.setAttribute('type', 'text');
@@ -59,9 +77,9 @@
             }
         });
 
-        formLogin.addEventListener('submit', function(e) {
-            const sandi = formLogin.querySelector('#sandi').value;
-            const sandiUlang = formLogin.querySelector('#sandi_ulang').value;
+        formregister.addEventListener('submit', function(e) {
+            const sandi = formregister.querySelector('#sandi').value;
+            const sandiUlang = formregister.querySelector('#sandi_ulang').value;
 
             if (sandi != sandiUlang) {
                 alert("Ketik ulang kata sandi yang sama.")

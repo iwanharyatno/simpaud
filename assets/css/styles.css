@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 
 :root {
@@ -11,7 +11,11 @@
     --color-shade: rgba(0, 0, 0, 0.05);
     --color-primary: #6A42C2;
     --color-primary-elevated: #4c2996;
-    --color-secondary: #FF885B;
+    --color-primary-soft: #e0d1ff;
+    --color-secondary: #909090;
+    --color-secondary-elevated: #6c6c6c;
+    --color-error: #C63C51;
+    --color-dark-shade: #a0a0a0;
 }
 
 html {
@@ -81,6 +85,7 @@ body {
     border: none;
     cursor: pointer;
     background-color: transparent;
+    font-size: 1rem;
 }
 
 .btn-primary {
@@ -89,6 +94,14 @@ body {
 }
 .btn-primary:hover {
     background-color: var(--color-primary-elevated);
+}
+
+.btn-link {
+    color: var(--color-primary);
+}
+.btn-link:hover {
+    color: var(--color-primary-elevated);
+    text-decoration: underline;
 }
 
 .hero {
@@ -120,25 +133,25 @@ body {
     font-weight: 600;
 }
 
-#formLogin {
+#formRegister {
     font-size: small;
 }
-.login-flex {
+.register-flex {
     display: flex;
     min-height: 100vh;
     flex-direction: column-reverse;
 }
 
-.login-left-side {
+.register-left-side {
     width: 100%;
 }
-.login-right-side {
+.register-right-side {
     background-color: var(--color-light);
     width: 100%;
     padding: 2rem;
 }
 
-.login-form-title {
+.register-form-title {
     text-align: center;
     margin-bottom: 1rem;
 }
@@ -159,7 +172,99 @@ body {
     margin-bottom: 1rem;
 }
 
+.alert {
+    display: block;
+    padding: 0.5rem 0.8rem;
+    margin: 1.5rem 0;
+    border-radius: 0.2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.alert-error {
+    background-color: var(--color-error);
+    color: var(--color-light);
+}
+.alert-dismiss {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: currentColor;
+}
+
+.registration-wrapper {
+    max-width: 52rem;
+    margin: 2rem auto;
+}
+.registration-title {
+    text-align: center;
+}
+
+.registration-box {
+    background-color: var(--color-light);
+    margin-top: 2rem;
+}
+.registration-tabs {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.registration-tab {
+    padding: 0.8rem 1.2rem;
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+.registration-tab:hover {
+    background-color: var(--color-shade);
+}
+.registration-tab.active {
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-primary);
+}
+.registration-tabpage.hidden {
+    display: none;
+}
+
+.registration-tabpage {
+    padding: 1.5rem;
+    min-height: 18rem;
+}
+.registration-tabpage-title {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+.registration-biodata-nama-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: stretch;
+    flex-direction: column;
+}
+.registration-tabpage-form {
+    margin-top: 1.5em;
+}
+
+.registration-tabpage-statusberkas-status {
+    margin-top: 2rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    
+}
+.registration-tabpage-berkaspendaftaran-boxhint {
+    background-color: var(--color-primary-soft);
+    padding: 1rem 2rem;
+    display: inline-block;
+    border-radius: 0.15rem;
+    margin-bottom: 1.5rem;
+}
+
 @media screen and (min-width: 768px) {
+    .registration-biodata-nama-group {
+        flex-direction: row;
+    }
     .nav-toggler {
         display: none;
     }
@@ -179,13 +284,13 @@ body {
         align-items: center;
     }
 
-    .login-flex {
+    .register-flex {
         flex-direction: row;
     }
-    .login-left-side {
+    .register-left-side {
         width: 65%;
     }
-    .login-right-side {
+    .register-right-side {
         width: 35%;
     }
 }
