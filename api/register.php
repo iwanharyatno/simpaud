@@ -61,7 +61,7 @@ session_start();
     <script src="/assets/scripts/alert.js"></script>
 
     <script>
-        const formregister = document.getElementById('formregister');
+        const formregister = document.getElementById('formRegister');
         const toggleSandi = document.getElementById('toggleSandi');
 
         toggleSandi.addEventListener('click', function() {
