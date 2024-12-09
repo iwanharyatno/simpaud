@@ -232,7 +232,7 @@ function status_to_class($status)
                         <div class="registration-tabpage-statusberkas-categorybox">
                             <h2 class="registration-tabpage-statusberkas-category">Biodata Orang Tua</h2>
                             <p class="registration-tabpage-statusberkas-categorystatus <?= status_to_class($res_ortu_list[0]['status']) ?>"><?= $res_ortu_list[0]['status'] ?></p>
-                            <p class="registration-tabpage-statusberkas-categorynote"><?= $res_ortu_list[0]['catatan'] ? $res_ortu[0]['catatan'] : 'Belum ada catatan' ?></p>
+                            <p class="registration-tabpage-statusberkas-categorynote"><?= $res_ortu_list[0]['catatan'] ? $res_ortu_list[0]['catatan'] : 'Belum ada catatan' ?></p>
                         </div>
                     <?php endif; ?>
 
@@ -240,7 +240,7 @@ function status_to_class($status)
                         <div class="registration-tabpage-statusberkas-categorybox">
                             <h2 class="registration-tabpage-statusberkas-category">Berkas Pendaftaran</h2>
                             <p class="registration-tabpage-statusberkas-categorystatus <?= status_to_class($res_berkas['status']) ?>"><?= $res_berkas['status'] ?></p>
-                            <p class="registration-tabpage-statusberkas-categorynote"><?= $res_berkas['catatan'] ? $res_murid['catatan'] : 'Belum ada catatan' ?></p>
+                            <p class="registration-tabpage-statusberkas-categorynote"><?= $res_berkas['catatan'] ? $res_berkas['catatan'] : 'Belum ada catatan' ?></p>
                         </div>
                     <?php endif; ?>
                 </div>
