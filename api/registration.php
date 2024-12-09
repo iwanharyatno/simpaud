@@ -156,17 +156,21 @@ $status_user = $res_user['status'];
                                     <th style="width: 12rem">Nama Lengkap</th>
                                     <th style="width: 8rem">Hubungan</th>
                                     <th style="width: 15rem">Alamat</th>
-                                    <th>Aksi</th>
+                                    <?php if ($status_user == 'Draf' || $status_user == 'Ditolak'): ?>
+                                        <th>Aksi</th>
+                                    <?php endif; ?>
                                 </tr>
                                 <?php foreach ($res_ortu_list as $res_ortu): ?>
                                     <tr class="table-row">
                                         <td><?= $res_ortu['nama_lengkap'] ?></td>
                                         <td><?= $res_ortu['hubungan'] ?></td>
                                         <td><?= $res_ortu['alamat'] ?></td>
-                                        <td>
-                                            <button type="button" class="btn btn-success" onclick="editOrtu(this, <?= $res_ortu['id'] ?>)">Edit</button>
-                                            <button type="button" class="btn btn-danger" name="action" onclick="deleteOrtu(<?= $res_ortu['id'] ?>)">Hapus</button>
-                                        </td>
+                                        <?php if ($status_user == 'Draf' || $status_user == 'Ditolak'): ?>
+                                            <td>
+                                                <button type="button" class="btn btn-success" onclick="editOrtu(this, <?= $res_ortu['id'] ?>)">Edit</button>
+                                                <button type="button" class="btn btn-danger" name="action" onclick="deleteOrtu(<?= $res_ortu['id'] ?>)">Hapus</button>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -207,9 +211,9 @@ $status_user = $res_user['status'];
                             <label for="path_berkas">Link Drive Berkas</label>
                             <input type="text" class="form-control w-full" id="path_berkas" name="path_berkas" required value="<?= $res_berkas['path_berkas'] ?>">
                         </div>
-                        
+
                         <?php if ($status_user == 'Draf' || $status_user == 'Ditolak'): ?>
-                        <button class="btn btn-primary">Simpan</button>
+                            <button class="btn btn-primary">Simpan</button>
                         <?php endif; ?>
                     </form>
                 </div>

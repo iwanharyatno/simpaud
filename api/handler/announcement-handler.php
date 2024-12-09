@@ -22,9 +22,6 @@ if ($res_usr['role'] != 'Admin') {
     header('Location: /registration.php', true);
 }
 
-$judul = $_POST['judul'];
-$teks = $_POST['teks'];
-
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
     $sql = "DELETE FROM pengumuman WHERE id = $id";
@@ -33,6 +30,9 @@ if (isset($_POST['delete'])) {
 
     header('Location: /admin/index.php#buat-pengumuman', true);
 } else if (isset($_POST['id'])) {
+    $judul = $_POST['judul'];
+    $teks = $_POST['teks'];
+
     $id = $_POST['id'];
     $sql = "UPDATE pengumuman SET judul = '$judul', teks = '$teks' WHERE id = $id";
     $stmt = $pdo->prepare($sql);
@@ -40,6 +40,9 @@ if (isset($_POST['delete'])) {
 
     header('Location: /admin/index.php#buat-pengumuman', true);
 }  else {
+    $judul = $_POST['judul'];
+    $teks = $_POST['teks'];
+
     $sql = "INSERT INTO pengumuman (judul, teks) VALUES ('$judul', '$teks')";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
