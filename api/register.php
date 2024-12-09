@@ -1,5 +1,23 @@
 <?php
 session_start();
+
+require __DIR__ . "/./constants/constants.php";
+require __DIR__ . "/./db/config.php";
+
+if (isset($_COOKIE[USER_ID_COOKIE_KEY])) {
+    $login_id = $_COOKIE[USER_ID_COOKIE_KEY];
+    $sql = "SELECT role FROM login WHERE id = $login_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $res_usr = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($res_usr['role'] == 'Admin') {
+        header('Location: /admin/index.php', true);
+    } else {
+        header('Location: /registration.php', true);
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

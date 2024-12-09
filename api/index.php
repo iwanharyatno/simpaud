@@ -25,6 +25,7 @@
                 <li><a class="navigation-item" href="#">Tentang Kami</a></li>
                 <li><a class="navigation-item" href="#">Informasi Layanan</a></li>
                 <li><a class="navigation-item nav-last-item" href="#">Kontak</a></li>
+                <li><a class="btn btn-link" href="login.php">Login</a></li>
                 <li><a class="btn btn-primary" href="register.php">Daftar</a></li>
             </ul>
         </nav>
