@@ -81,6 +81,9 @@ function status_to_class($status)
         return 'rejected';
     }
 }
+
+$lengkap = isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && isset($_COOKIE[USER_BIODATA_ID_COOKIE_KEY]) && count($res_ortu_list) > 0;
+$status_user = $res_user['status'];
 ?>
 
 <!DOCTYPE html>
@@ -137,7 +140,9 @@ function status_to_class($status)
                             <label for="alamat">Alamat</label>
                             <textarea type="date" class="form-control w-full" id="alamat" name="alamat" rows="5" required><?= $res_murid['alamat'] ?></textarea>
                         </div>
-                        <button class="btn btn-primary">Simpan</button>
+                        <?php if ($status_user == 'Draf' || $status_user == 'Ditolak'): ?>
+                            <button class="btn btn-primary">Simpan</button>
+                        <?php endif; ?>
                     </form>
                 </div>
                 <div class="registration-tabpage hidden" id="biodata-ortu">
@@ -166,25 +171,26 @@ function status_to_class($status)
                                 <?php endforeach; ?>
                             </table>
                         </div>
-                        <div class="form-group">
-                            <label for="nama_lengkap">Nama Lengkap</label>
-                            <input type="text" class="form-control w-full" id="nama_lengkap" name="nama_lengkap" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="hubungan">Hubungan</label>
-                            <select class="form-control w-full" id="hubungan" name="hubungan" required>
-                                <option value="Ibu">Ibu</option>
-                                <option value="Ayah">Ayah</option>
-                                <option value="Wali">Wali</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="alamat">Alamat</label>
-                            <textarea class="form-control w-full" id="alamat" name="alamat" rows="5" required></textarea>
-                        </div>
-
-                        <button class="btn btn-primary">Simpan</button>
-                        <button class="btn btn-secondary" type="reset">Reset</button>
+                        <?php if ($status_user == 'Draf' || $status_user == 'Ditolak'): ?>
+                            <div class="form-group">
+                                <label for="nama_lengkap">Nama Lengkap</label>
+                                <input type="text" class="form-control w-full" id="nama_lengkap" name="nama_lengkap" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="hubungan">Hubungan</label>
+                                <select class="form-control w-full" id="hubungan" name="hubungan" required>
+                                    <option value="Ibu">Ibu</option>
+                                    <option value="Ayah">Ayah</option>
+                                    <option value="Wali">Wali</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                <textarea class="form-control w-full" id="alamat" name="alamat" rows="5" required></textarea>
+                            </div>
+                            <button class="btn btn-primary">Simpan</button>
+                            <button class="btn btn-secondary">Reset</button>
+                        <?php endif; ?>
                     </form>
                 </div>
                 <div class="registration-tabpage hidden" id="berkas-pendaftaran">
@@ -201,14 +207,13 @@ function status_to_class($status)
                             <label for="path_berkas">Link Drive Berkas</label>
                             <input type="text" class="form-control w-full" id="path_berkas" name="path_berkas" required value="<?= $res_berkas['path_berkas'] ?>">
                         </div>
+                        
+                        <?php if ($status_user == 'Draf' || $status_user == 'Ditolak'): ?>
                         <button class="btn btn-primary">Simpan</button>
-                        <a href="#status-berkas" class="btn btn-link">Lanjut</a>
+                        <?php endif; ?>
                     </form>
                 </div>
                 <div class="registration-tabpage hidden" id="status-berkas">
-                    <?php
-                    $lengkap = isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && isset($_COOKIE[USER_BIODATA_ID_COOKIE_KEY]) && count($res_ortu_list) > 0;
-                    ?>
 
                     <h2 class="registration-tabpage-title">Status Berkas</h2>
                     <p class="registration-tabpage-statusberkas-status"><?= $lengkap ? 'Lengkap' : 'Belum Lengkap' ?></p>
