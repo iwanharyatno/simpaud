@@ -10,10 +10,10 @@ if (isset($_COOKIE[USER_ID_COOKIE_KEY])) {
     $sql = "SELECT status FROM login WHERE id = $user_id";
     $stat = $pdo->prepare($sql);
     $stat->execute();
-    
+
     $res_user = $stat->fetch(PDO::FETCH_ASSOC);
 } else {
-    header('Location: /login.php'); 
+    header('Location: /login.php');
 }
 
 if (isset($_COOKIE[USER_BIODATA_ID_COOKIE_KEY]) && $_COOKIE[USER_BIODATA_ID_COOKIE_KEY] != null) {
@@ -22,7 +22,7 @@ if (isset($_COOKIE[USER_BIODATA_ID_COOKIE_KEY]) && $_COOKIE[USER_BIODATA_ID_COOK
     $sql = "SELECT nama_depan, nama_belakang, tanggal_lahir, jenis_kelamin, alamat, status, catatan FROM biodata_murid WHERE id = $biodata_id";
     $stat = $pdo->prepare($sql);
     $stat->execute();
-    
+
     $res_murid = $stat->fetch(PDO::FETCH_ASSOC);
 } else {
     $res_murid = [
@@ -40,13 +40,12 @@ if (isset($_COOKIE[USER_ID_COOKIE_KEY]) && $_COOKIE[USER_ID_COOKIE_KEY] != null)
     $sql = "SELECT id, nama_lengkap, hubungan, alamat, status, catatan FROM biodata_ortu WHERE id_login = $user_id";
     $stat = $pdo->prepare($sql);
     $stat->execute();
-    
+
     $res_ortu_list = $stat->fetchAll(PDO::FETCH_ASSOC);
 
     if (!$res_ortu_list) {
         $res_ortu_list = [];
     }
-
 } else {
     $res_ortu_list = [];
 }
@@ -57,12 +56,30 @@ if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $_COOKIE[USER_BERKAS_ID_COOKIE
     $sql = "SELECT path_berkas, status, catatan FROM berkas_pendaftaran WHERE id = $berkas_id";
     $stat = $pdo->prepare($sql);
     $stat->execute();
-    
+
     $res_berkas = $stat->fetch(PDO::FETCH_ASSOC);
 } else {
     $res_berkas = [
         'path_berkas' => ''
     ];
+}
+
+$sql = "SELECT id, judul, teks, tanggal FROM pengumuman WHERE date_part('year', tanggal) = date_part('year', CURRENT_DATE) ORDER BY id";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$res_pengumuman_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+function status_to_class($status)
+{
+    if ($status == 'Diproses') {
+        return 'pending';
+    }
+    if ($status == 'Diterima') {
+        return 'accepted';
+    }
+    if ($status == 'Ditolak') {
+        return 'rejected';
+    }
 }
 ?>
 
@@ -127,7 +144,7 @@ if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $_COOKIE[USER_BERKAS_ID_COOKIE
                     <h2 class="registration-tabpage-title">Biodata Ortu</h2>
                     <form action="/handler/ortu-handler.php" method="post" class="registration-tabpage-form" id="registrationOrtu">
                         <input type="number" style="display: none;" name="biodata_ortu_id">
-                        
+
                         <div class="form-group table-wrapper">
                             <table class="table w-full">
                                 <tr class="table-row">
@@ -136,16 +153,16 @@ if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $_COOKIE[USER_BERKAS_ID_COOKIE
                                     <th style="width: 15rem">Alamat</th>
                                     <th>Aksi</th>
                                 </tr>
-                                <?php foreach($res_ortu_list as $res_ortu): ?>
-                                <tr class="table-row">
-                                    <td><?= $res_ortu['nama_lengkap'] ?></td>
-                                    <td><?= $res_ortu['hubungan'] ?></td>
-                                    <td><?= $res_ortu['alamat'] ?></td>
-                                    <td>
-                                        <button type="button" class="btn btn-success" onclick="editOrtu(this, <?= $res_ortu['id'] ?>)">Edit</button>
-                                        <button type="button" class="btn btn-danger" name="action" onclick="deleteOrtu(<?= $res_ortu['id'] ?>)">Hapus</button>
-                                    </td>
-                                </tr>
+                                <?php foreach ($res_ortu_list as $res_ortu): ?>
+                                    <tr class="table-row">
+                                        <td><?= $res_ortu['nama_lengkap'] ?></td>
+                                        <td><?= $res_ortu['hubungan'] ?></td>
+                                        <td><?= $res_ortu['alamat'] ?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success" onclick="editOrtu(this, <?= $res_ortu['id'] ?>)">Edit</button>
+                                            <button type="button" class="btn btn-danger" name="action" onclick="deleteOrtu(<?= $res_ortu['id'] ?>)">Hapus</button>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </table>
                         </div>
@@ -165,7 +182,7 @@ if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $_COOKIE[USER_BERKAS_ID_COOKIE
                             <label for="alamat">Alamat</label>
                             <textarea class="form-control w-full" id="alamat" name="alamat" rows="5" required></textarea>
                         </div>
-                        
+
                         <button class="btn btn-primary">Simpan</button>
                         <button class="btn btn-secondary" type="reset">Reset</button>
                     </form>
@@ -197,38 +214,46 @@ if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $_COOKIE[USER_BERKAS_ID_COOKIE
                     <p class="registration-tabpage-statusberkas-status"><?= $lengkap ? 'Lengkap' : 'Belum Lengkap' ?></p>
 
                     <?php if (($res_user['status'] == 'Draf' || $res_user['status'] == 'Ditolak') && $lengkap): ?>
-                    <form action="/handler/pengajuan-handler.php" method="post" class="registration-tabpage-statusberkas-formajukan">
-                        <button class="btn btn-primary">Ajukan berkas</button>
-                    </form>
+                        <form action="/handler/pengajuan-handler.php" method="post" class="registration-tabpage-statusberkas-formajukan">
+                            <button class="btn btn-primary">Ajukan berkas</button>
+                        </form>
                     <?php endif; ?>
 
                     <hr>
-                    <?php if (isset($_COOKIE[USER_BIODATA_ID_COOKIE_KEY]) && $res_user['status'] == 'Diajukan'): ?>
-                    <div class="registration-tabpage-statusberkas-categorybox">
-                        <h2 class="registration-tabpage-statusberkas-category">Biodata Murid</h2>
-                        <p class="registration-tabpage-statusberkas-categorystatus pending"><?= $res_murid['status'] ?></p>
-                        <p class="registration-tabpage-statusberkas-categorynote"><?= $res_murid['catatan'] ? $res_murid['catatan'] : 'Belum ada catatan' ?></p>
-                    </div>
+                    <?php if (isset($_COOKIE[USER_BIODATA_ID_COOKIE_KEY]) && $res_user['status'] != 'Draf'): ?>
+                        <div class="registration-tabpage-statusberkas-categorybox">
+                            <h2 class="registration-tabpage-statusberkas-category">Biodata Murid</h2>
+                            <p class="registration-tabpage-statusberkas-categorystatus <?= status_to_class($res_murid['status']) ?>"><?= $res_murid['status'] ?></p>
+                            <p class="registration-tabpage-statusberkas-categorynote"><?= $res_murid['catatan'] ? $res_murid['catatan'] : 'Belum ada catatan' ?></p>
+                        </div>
                     <?php endif; ?>
 
-                    <?php if (count($res_ortu_list) > 0 && $res_user['status'] == 'Diajukan'): ?>
-                    <div class="registration-tabpage-statusberkas-categorybox">
-                        <h2 class="registration-tabpage-statusberkas-category">Biodata Orang Tua</h2>
-                        <p class="registration-tabpage-statusberkas-categorystatus pending"><?= $res_ortu_list[0]['status'] ?></p>
-                        <p class="registration-tabpage-statusberkas-categorynote"><?= $res_ortu_list[0]['catatan'] ? $res_ortu[0]['catatan'] : 'Belum ada catatan' ?></p>
-                    </div>
+                    <?php if (count($res_ortu_list) > 0 && $res_user['status'] != 'Draf'): ?>
+                        <div class="registration-tabpage-statusberkas-categorybox">
+                            <h2 class="registration-tabpage-statusberkas-category">Biodata Orang Tua</h2>
+                            <p class="registration-tabpage-statusberkas-categorystatus <?= status_to_class($res_ortu_list[0]['status']) ?>"><?= $res_ortu_list[0]['status'] ?></p>
+                            <p class="registration-tabpage-statusberkas-categorynote"><?= $res_ortu_list[0]['catatan'] ? $res_ortu[0]['catatan'] : 'Belum ada catatan' ?></p>
+                        </div>
                     <?php endif; ?>
 
-                    <?php if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $res_user['status'] == 'Diajukan'): ?>
-                    <div class="registration-tabpage-statusberkas-categorybox">
-                        <h2 class="registration-tabpage-statusberkas-category">Berkas Pendaftaran</h2>
-                        <p class="registration-tabpage-statusberkas-categorystatus pending"><?= $res_berkas['status'] ?></p>
-                        <p class="registration-tabpage-statusberkas-categorynote"><?= $res_berkas['catatan'] ? $res_murid['catatan'] : 'Belum ada catatan' ?></p>
-                    </div>
+                    <?php if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $res_user['status'] != 'Draf'): ?>
+                        <div class="registration-tabpage-statusberkas-categorybox">
+                            <h2 class="registration-tabpage-statusberkas-category">Berkas Pendaftaran</h2>
+                            <p class="registration-tabpage-statusberkas-categorystatus <?= status_to_class($res_berkas['status']) ?>"><?= $res_berkas['status'] ?></p>
+                            <p class="registration-tabpage-statusberkas-categorynote"><?= $res_berkas['catatan'] ? $res_murid['catatan'] : 'Belum ada catatan' ?></p>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <div class="registration-tabpage hidden" id="pengumuman">
                     <h2 class="registration-tabpage-title">Pengumuman</h2>
+                    <br>
+                    <?php foreach ($res_pengumuman_list as $res_pengumuman): ?>
+                        <div class="announcement">
+                            <h3 class="announcement-title"><?= $res_pengumuman['judul'] ?></h3>
+                            <small class="announcement-date"><?= date_format(date_create($res_pengumuman['tanggal']), 'd M Y') ?></small>
+                            <p class="announcement-text"><?= $res_pengumuman['teks'] ?></p>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
@@ -267,7 +292,7 @@ if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $_COOKIE[USER_BERKAS_ID_COOKIE
             const namaLengkapTd = tr.querySelectorAll('td')[0];
             const hubunganTd = tr.querySelectorAll('td')[1];
             const alamatTd = tr.querySelectorAll('td')[2];
-            
+
             document.querySelector('form#registrationOrtu input[name="biodata_ortu_id"]').value = id;
             document.querySelector('form#registrationOrtu input[name="nama_lengkap"]').value = namaLengkapTd.innerText;
             document.querySelector('form#registrationOrtu select[name="hubungan"]').value = hubunganTd.innerText;
@@ -280,7 +305,7 @@ if (isset($_COOKIE[USER_BERKAS_ID_COOKIE_KEY]) && $_COOKIE[USER_BERKAS_ID_COOKIE
             if (!result) return;
 
             const form = document.querySelector('form#registrationOrtu');
-            
+
             const url = form.getAttribute('action');
             form.setAttribute('action', url + '?delete_id=' + id);
 

@@ -2,6 +2,7 @@
 session_start();
 
 require __DIR__ . "/../db/config.php";
+require __DIR__ . "/../constants/constants.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $username = $_POST['username'];
@@ -35,4 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } else {
         echo "gagal!";
     }
+} else {
+    http_response_code(405);
+    exit;
 }

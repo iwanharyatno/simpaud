@@ -1,9 +1,18 @@
 <?php
 
+require __DIR__ . "/../constants/constants.php";
+if (!isset($_COOKIE[USER_ID_COOKIE_KEY])) {
+    header('Location: /login.php', true);
+}
+
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    http_response_code(405);
+    exit;
+}
+
 session_start();
 
 require __DIR__ . "/../db/config.php";
-require __DIR__ . "/../constants/constants.php";
 
 $login_id = $_COOKIE[USER_ID_COOKIE_KEY];
 $path_berkas = $_POST['path_berkas'];

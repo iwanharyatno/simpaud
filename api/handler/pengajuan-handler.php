@@ -1,11 +1,16 @@
 <?php
 
 require __DIR__ . "/../constants/constants.php";
-require __DIR__ . "/../db/config.php";
+if (!isset($_COOKIE[USER_ID_COOKIE_KEY])) {
+    header('Location: /login.php', true);
+}
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    http_response_code(403);
+    http_response_code(405);
+    exit;
 }
+
+require __DIR__ . "/../db/config.php";
 
 $user_id = $_COOKIE[USER_ID_COOKIE_KEY];
 
