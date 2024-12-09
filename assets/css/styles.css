@@ -15,6 +15,9 @@
     --color-secondary: #909090;
     --color-secondary-elevated: #6c6c6c;
     --color-error: #C63C51;
+    --color-error-elevated: #9e2436;
+    --color-success: #618264;
+    --color-success-elevated: #3f6e43;
     --color-dark-shade: #a0a0a0;
 }
 
@@ -93,7 +96,7 @@ a:hover {
     border: none;
     cursor: pointer;
     background-color: transparent;
-    font-size: 1rem;
+    font-size: inherit;
 }
 
 .btn-primary {
@@ -102,6 +105,30 @@ a:hover {
 }
 .btn-primary:hover {
     background-color: var(--color-primary-elevated);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-light);
+}
+.btn-secondary:hover {
+    background-color: var(--color-secondary-elevated);
+}
+
+.btn-danger {
+    background-color: var(--color-error);
+    color: var(--color-light);
+}
+.btn-danger:hover {
+    background-color: var(--color-error-elevated);
+}
+
+.btn-success {
+    background-color: var(--color-success);
+    color: var(--color-light);
+}
+.btn-success:hover {
+    background-color: var(--color-success-elevated);
 }
 
 .btn-link {
@@ -168,6 +195,7 @@ a:hover {
     display: block;
 }
 .form-control {
+    font-family: inherit;
     border: 1px solid var(--color-border);
     padding: 0.5rem;
     border-radius: 0.4rem;
@@ -204,6 +232,11 @@ a:hover {
 .registration-wrapper {
     max-width: 52rem;
     margin: 2rem auto;
+}
+.registration-wrapper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .registration-title {
     text-align: center;
@@ -259,14 +292,58 @@ a:hover {
     margin-top: 2rem;
     font-weight: 500;
     color: var(--color-primary);
-    
+    margin-bottom: 1rem;
 }
+.registration-tabpage-statusberkas-formajukan {
+    margin-bottom: 2rem;
+    display: block;
+}
+.registration-tabpage-statusberkas-category {
+    font-size: 1rem;
+}
+.registration-tabpage-statusberkas-categorybox {
+    margin: 1rem 0;
+}
+.registration-tabpage-statusberkas-categorystatus {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    font-size: small;
+    border-radius: 99999px;
+}
+.registration-tabpage-statusberkas-categorynote {
+    margin-top: 0.8rem;
+    padding: 0.5rem;
+    background-color: var(--color-elevated);
+    border-radius: 0.2rem;
+    font-size: small;
+}
+.registration-tabpage-statusberkas-categorystatus.pending {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+}
+
 .registration-tabpage-berkaspendaftaran-boxhint {
     background-color: var(--color-primary-soft);
     padding: 1rem 2rem;
     display: inline-block;
     border-radius: 0.15rem;
     margin-bottom: 1.5rem;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow: auto;
+}
+.table {
+    border: 1px solid var(--color-border);
+    border-collapse: collapse;
+    margin: 0.8rem 0;
+    font-size: small;
+}
+.table-row th,
+.table-row td {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
 }
 
 @media screen and (min-width: 768px) {

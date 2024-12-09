@@ -29,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $sql = "INSERT INTO login (username, email, telepon, sandi) VALUES ('$username', '$email', '$telepon', '$sandi')";
 
     if ($pdo->exec($sql)) {
-        setcookie('user-email', $email);
+        $id = $pdo->lastInsertId();
+        setcookie(USER_ID_COOKIE_KEY, $id, time() + 60*60*24*30, "/");
         header('location: /registration.php', true);
     } else {
         echo "gagal!";
