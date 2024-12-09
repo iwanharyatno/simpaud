@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $stat->execute();
 
         $res = $stat->fetch(PDO::FETCH_ASSOC);
-        setcookie(USER_BIODATA_ID_COOKIE_KEY, $res['biodata_murid_id'], time() + 60*60*24*30, '/');
-        setcookie(USER_BERKAS_ID_COOKIE_KEY, $res['berkas_pendaftaran_id'], time() + 60*60*24*30, '/');
+        if ($res['biodata_murid_id'] != null) setcookie(USER_BIODATA_ID_COOKIE_KEY, $res['biodata_murid_id'], time() + 60*60*24*30, '/');
+        if ($res['berkas_pendaftaran_id'] != null) setcookie(USER_BERKAS_ID_COOKIE_KEY, $res['berkas_pendaftaran_id'], time() + 60*60*24*30, '/');
 
         if ($role == 'Admin') {
             header('Location: /admin/index.php', true);
