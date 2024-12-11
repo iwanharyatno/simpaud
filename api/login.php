@@ -33,7 +33,6 @@ if (isset($_COOKIE[USER_ID_COOKIE_KEY])) {
     <?php
         if (isset($_SESSION['error'])) {
             $oldData = $_SESSION['data'];
-            session_destroy();
         }
     ?>
     <main class="register-flex">
@@ -81,5 +80,13 @@ if (isset($_COOKIE[USER_ID_COOKIE_KEY])) {
             }
         });
     </script>
+
+    <?php
+
+    if (isset($_SESSION['error'])) {
+        session_destroy();
+    }
+
+    ?>
 </body>
 </html>
