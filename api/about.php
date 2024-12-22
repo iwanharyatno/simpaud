@@ -31,9 +31,8 @@
         </nav>
         <section class="hero">
             <div class="hero-text">
-                <p class="hero-title">Tempat pilihan untuk <span id="hero-belajar">belajar</span> dan <span id="hero-bermain">bermain</span> untuk anak!</p>
-                <p class="hero-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, voluptatibus! Praesentium, adipisci!</p>
-                <a href="register.php" class="btn btn-primary hero-btn">Ayo mulai!</a>
+                <p class="hero-title">Tentang Kami</p>
+                <p class="hero-description">PAUD Pelangi adalah sebuah lembaga pendidikan anak usia dini yang berlokasi di Desa Somagede, RT 02 RW 08, Kecamatan Somagede, Kabupaten Banyumas. Lembaga ini berperan penting dalam memberikan pendidikan dasar bagi anak-anak di lingkungan sekitarnya.</p>
             </div>
         </section>
     </header>

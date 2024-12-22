@@ -46,11 +46,16 @@ a:hover {
 .navigation {
     display: flex;
     padding: 1rem 2rem;
-    position: static;
-    top: 0;
+    position: sticky;
+    top: -2px;
     left: 0;
     width: 100%;
     flex-direction: column;
+    transition: all 0.3s;
+}
+
+.navigation.is-pinned {
+    background-color: #e5ccfb;
 }
 
 .navigation-menu {
@@ -164,7 +169,7 @@ a:hover {
     font-weight: 600;
 }
 #hero-bermain {
-    color: var(--color-secondary);
+    color: var(--color-success-elevated);
     font-weight: 600;
 }
 
@@ -404,7 +409,7 @@ a:hover {
     .navigation {
         flex-direction: row;
         align-items: center;
-        position: fixed
+        position: fixed;
     }
     .hero {
         justify-content: center;
@@ -419,5 +424,9 @@ a:hover {
     }
     .register-right-side {
         width: 35%;
+    }
+
+    .contact {
+        margin-top: 4rem;
     }
 }
