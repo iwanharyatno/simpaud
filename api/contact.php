@@ -42,20 +42,8 @@
                         <input type="email" class="form-control w-full" id="email" name="email" required value="<?= isset($oldData) ?  $oldData['email'] : '' ?>">
                     </div>
                     <div class="form-group">
-                        <label for="telepon" class="form-label">Telepon</label>
-                        <input type="text" class="form-control w-full" id="telepon" name="telepon" required value="<?= isset($oldData) ?  $oldData['telepon'] : '' ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="sandi" class="form-label">Sandi</label>
-                        <input type="password" class="form-control w-full" id="sandi" name="sandi" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sandi_ulang" class="form-label">Ketik ulang sandi</label>
-                        <input type="password" class="form-control w-full" id="sandi_ulang" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" id="toggleSandi">
-                        <label for="toggleSandi">Tampil sandi</label>
+                        <label for="pesan" class="form-label">Pesan</label>
+                        <textarea type="text" class="form-control w-full" id="pesan" name="pesan" rows="10"></textarea>
                     </div>
                     <br>
                     <button class="btn btn-primary w-full">Kirim</button>
