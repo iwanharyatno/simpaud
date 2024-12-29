@@ -23,7 +23,6 @@
             <ul class="navigation-menu" id="mainMenu">
                 <li><a class="navigation-item" href="/">Beranda</a></li>
                 <li><a class="navigation-item" href="about.php">Tentang Kami</a></li>
-                <li><a class="navigation-item" href="services.php">Informasi Layanan</a></li>
                 <li><a class="navigation-item nav-last-item" href="contact.php">Kontak</a></li>
                 <li><a class="btn btn-link" href="login.php">Login</a></li>
                 <li><a class="btn btn-primary" href="register.php">Daftar</a></li>

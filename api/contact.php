@@ -23,7 +23,6 @@
             <ul class="navigation-menu" id="mainMenu">
                 <li><a class="navigation-item" href="/">Beranda</a></li>
                 <li><a class="navigation-item" href="about.php">Tentang Kami</a></li>
-                <li><a class="navigation-item" href="services.php">Informasi Layanan</a></li>
                 <li><a class="navigation-item nav-last-item" href="contact.php">Kontak</a></li>
                 <li><a class="btn btn-link" href="login.php">Login</a></li>
                 <li><a class="btn btn-primary" href="register.php">Daftar</a></li>
@@ -32,7 +31,7 @@
         <section class="hero contact">
             <div class="hero-text">
                 <p class="hero-title">Hubungi Kami</p>
-                <form action="handler/register-handler.php" method="post">
+                <form method="post" onsubmit="return handleSubmit()">
                     <div class="form-group">
                         <label for="username" class="form-label">Nama</label>
                         <input type="text" class="form-control w-full" id="username" name="username" required value="<?= isset($oldData) ?  $oldData['username'] : '' ?>">
@@ -53,6 +52,17 @@
     </header>
 
     <script src="/assets/scripts/scripts.js"></script>
+    <script>
+        function handleSubmit() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const pesan = document.getElementById('pesan').value;
+
+            const mailtoLink = `mailto:iwanharyatno1@gmail.com?subject=Contact%20Form%20Submission%20Paud%20Pelangi&body=Nama:%20${username}%0AEmail:%20${email}%0APesan:%20${pesan}`;
+            window.location.href = mailtoLink;
+            return false;
+        }
+    </script>
 </body>
 
 </html>
